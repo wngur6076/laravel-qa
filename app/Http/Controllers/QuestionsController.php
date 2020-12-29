@@ -17,7 +17,7 @@ class QuestionsController extends Controller
     {
         $questions = Question::with('user')->latest()->Paginate(5);
 
-        return view("questions.index", compact('questions'));
+        return view('questions.index', compact('questions'));
     }
 
     /**
@@ -29,7 +29,7 @@ class QuestionsController extends Controller
     {
         $question = new Question();
 
-        return view("questions.create", compact('question'));
+        return view('questions.create', compact('question'));
     }
 
     /**
@@ -42,7 +42,7 @@ class QuestionsController extends Controller
     {
         $request->user()->questions()->create($request->only('title', 'body'));
 
-        return redirect()->route("questions.index")->with('success', "Your quesion has been submitted");
+        return redirect()->route('questions.index')->with('success', "Your quesion has been submitted");
     }
 
     /**
@@ -53,7 +53,9 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
+        $question->increment('views');
 
+        return view('questions.show', compact('question'));
     }
 
     /**
@@ -64,7 +66,7 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
-        return view("questions.edit", compact('question'));
+        return view('questions.edit', compact('question'));
     }
 
     /**
@@ -78,7 +80,7 @@ class QuestionsController extends Controller
     {
         $question->update($request->only('title', 'body'));
 
-        return redirect()->route("questions.index")->with('success', "Your quesion has been updated.");
+        return redirect()->route('questions.index')->with('success', "Your quesion has been updated.");
     }
 
     /**
@@ -91,6 +93,6 @@ class QuestionsController extends Controller
     {
         $question->delete();
 
-        return redirect()->route("questions.index")->with('success', "Your quesion has been deleted.");
+        return redirect()->route('questions.index')->with('success', "Your quesion has been deleted.");
     }
 }
