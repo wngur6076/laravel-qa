@@ -17,7 +17,7 @@ class QuestionsController extends Controller
     {
         $questions = Question::with('user')->latest()->Paginate(5);
 
-        return view('questions.index', compact('questions'));
+        return view("questions.index", compact('questions'));
     }
 
     /**
@@ -29,7 +29,7 @@ class QuestionsController extends Controller
     {
         $question = new Question();
 
-        return view('questions.create', compact('question'));
+        return view("questions.create", compact('question'));
     }
 
     /**
@@ -42,7 +42,7 @@ class QuestionsController extends Controller
     {
         $request->user()->questions()->create($request->only('title', 'body'));
 
-        return redirect()->route('questions.index')->with('success', "Your quesion has been submitted");
+        return redirect()->route("questions.index")->with('success', "Your quesion has been submitted");
     }
 
     /**
@@ -53,7 +53,7 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        //
+
     }
 
     /**
@@ -64,7 +64,7 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        return view("questions.edit", compact('question'));
     }
 
     /**
@@ -74,9 +74,11 @@ class QuestionsController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(AskQuestionRequest $request, Question $question)
     {
-        //
+        $question->update($request->only('title', 'body'));
+
+        return redirect()->route("questions.index")->with('success', "Your quesion has been updated.");
     }
 
     /**
