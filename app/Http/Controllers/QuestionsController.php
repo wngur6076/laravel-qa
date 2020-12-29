@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Requests\AskQuestionRequest;
+use Illuminate\Support\Facades\Gate;
 
 class QuestionsController extends Controller
 {
@@ -66,7 +67,12 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
+        dd($question);
         return view('questions.edit', compact('question'));
+        // if (Gate::allows('update-question', $question)) {
+        //     return view('questions.edit', compact('question'));
+        // }
+        // abort(403, "Access denied");
     }
 
     /**
