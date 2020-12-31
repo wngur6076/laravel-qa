@@ -5,6 +5,7 @@ use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\AcceptAnswerController;
+use App\Http\Controllers\VoteQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,8 @@ Route::resource('questions', QuestionsController::class)->except('show');
 Route::resource('questions.answers', AnswersController::class)->except(['index', 'create', 'show']);
 Route::get('/questions/{slug}', [QuestionsController::class, 'show'])->name('questions.show');
 Route::post('/answers/{answer}/accept', AcceptAnswerController::class)->name('answers.accept');
+
 Route::post('/questions/{question}/favorites', [FavoritesController::class, 'store'])->name('questions.favorite');
 Route::delete('/questions/{question}/favorites', [FavoritesController::class, 'destroy'])->name('questions.unfavorite');
+
+Route::post('/questions/{question}/vote', VoteQuestionController::class);
