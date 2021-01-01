@@ -24,6 +24,11 @@ class Question extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
+    // public function setBodyAttribute($value)
+    // {
+    //     $this->attributes['body'] = clean($value);
+    // }
+
     public function getUrlAttribute()
     {
         return route("questions.show", $this->slug);
@@ -47,9 +52,7 @@ class Question extends Model
 
     public function getBodyHtmlAttribute()
     {
-        $markdown = new \League\CommonMark\CommonMarkConverter(['allow_unsafe_links' => false]);
-
-        return $markdown->convertToHtml($this->body);
+        return clean($this->bodyhtml());
     }
 
     public function answers()
@@ -83,5 +86,22 @@ class Question extends Model
     public function getFavoritesCountAttribute()
     {
         return $this->favorites->count();
+    }
+
+    public function getExcerptAttribute()
+    {
+        return $this->excerpt(250);
+    }
+
+    public function excerpt($length)
+    {
+        return Str::limit(strip_tags($this->bodyhtml()), $length);
+    }
+
+    private function bodyhtml()
+    {
+        $markdown = new \League\CommonMark\CommonMarkConverter(['allow_unsafe_links' => false]);
+
+        return $markdown->convertToHtml($this->body);
     }
 }

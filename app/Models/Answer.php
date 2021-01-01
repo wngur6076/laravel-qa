@@ -26,7 +26,7 @@ class Answer extends Model
     {
         $markdown = new \League\CommonMark\CommonMarkConverter(['allow_unsafe_links' => false]);
 
-        return $markdown->convertToHtml($this->body);
+        return clean($markdown->convertToHtml($this->body));
     }
 
     public function getCreatedDateAttribute()
