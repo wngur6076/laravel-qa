@@ -8,7 +8,6 @@
                 <div class="form-group">
                     <textarea v-model="body" class="form-control" rows="10" required></textarea>
                 </div>
-                {{-- <input type="submit" @click.prevent="update" value="Update"> --}}
                 <button class="btn btn-primary" :disabled="isInvalid">Update</button>
                 <button class="btn btn-outline-secondary" @click="cancel" type="button">Cancel</button>
             </form>
@@ -21,11 +20,7 @@
                                 <a @click.prevent="edit" class="btn btn-sm btn-outline-info">Edit</a>
                             @endcan
                             @can('delete', $answer)
-                                <form class="form-delete" action="{{ route('questions.answers.destroy', [$question->id, $answer->id]) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
+                                    <button @click="destroy" type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                             @endcan
                         </div>
                     </div>
