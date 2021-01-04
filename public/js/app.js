@@ -11554,8 +11554,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['answer'],
   data: function data() {
@@ -11648,6 +11646,20 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Answer_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Answer.vue */ "./resources/js/components/Answer.vue");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
 //
 //
 //
@@ -11669,7 +11681,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['answers', 'count'],
+  props: ['question'],
+  data: function data() {
+    return {
+      questionId: this.question.id,
+      count: this.question.answers_count,
+      answers: [],
+      nextUrl: null
+    };
+  },
+  created: function created() {
+    this.fetch("/questions/".concat(this.questionId, "/answers"));
+  },
+  methods: {
+    fetch: function fetch(endpoint) {
+      var _this = this;
+
+      axios.get(endpoint).then(function (_ref) {
+        var _this$answers;
+
+        var data = _ref.data;
+
+        (_this$answers = _this.answers).push.apply(_this$answers, _toConsumableArray(data.data));
+
+        _this.nextUrl = data.next_page_url;
+      });
+    }
+  },
   computed: {
     title: function title() {
       return this.count + " " + (this.count > 1 ? 'Answers' : 'Answer');
@@ -11801,8 +11839,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Favorite_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Favorite.vue */ "./resources/js/components/Favorite.vue");
 /* harmony import */ var _Accept_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Accept.vue */ "./resources/js/components/Accept.vue");
-//
-//
 //
 //
 //
@@ -48183,125 +48219,123 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "media post" },
-      [
-        _c("vote", { attrs: { model: _vm.answer, name: "answer" } }),
-        _vm._v(" "),
-        _c("div", { staticClass: "media-body" }, [
-          _vm.editing
-            ? _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.update($event)
-                    }
+  return _c(
+    "div",
+    { staticClass: "media post" },
+    [
+      _c("vote", { attrs: { model: _vm.answer, name: "answer" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "media-body" }, [
+        _vm.editing
+          ? _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.update($event)
                   }
-                },
-                [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.body,
-                          expression: "body"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { rows: "10", required: "" },
-                      domProps: { value: _vm.body },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.body = $event.target.value
-                        }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.body,
+                        expression: "body"
                       }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { disabled: _vm.isInvalid }
-                    },
-                    [_vm._v("Update")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-secondary",
-                      attrs: { type: "button" },
-                      on: { click: _vm.cancel }
-                    },
-                    [_vm._v("Cancel")]
-                  )
-                ]
-              )
-            : _c("div", [
-                _c("div", { domProps: { innerHTML: _vm._s(_vm.bodyHtml) } }),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-4" }, [
-                    _c("div", { staticClass: "ml-auto" }, [
-                      _vm.authorize("modify", _vm.answer)
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-sm btn-outline-info",
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.edit($event)
-                                }
-                              }
-                            },
-                            [_vm._v("Edit")]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.authorize("modify", _vm.answer)
-                        ? _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-sm btn-outline-danger",
-                              attrs: { type: "submit" },
-                              on: { click: _vm.destroy }
-                            },
-                            [_vm._v("Delete")]
-                          )
-                        : _vm._e()
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-4" }),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-4" },
-                    [
-                      _c("user-info", {
-                        attrs: { model: _vm.answer, label: "Answered" }
-                      })
                     ],
-                    1
-                  )
-                ])
+                    staticClass: "form-control",
+                    attrs: { rows: "10", required: "" },
+                    domProps: { value: _vm.body },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.body = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { disabled: _vm.isInvalid }
+                  },
+                  [_vm._v("Update")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-secondary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.cancel }
+                  },
+                  [_vm._v("Cancel")]
+                )
+              ]
+            )
+          : _c("div", [
+              _c("div", { domProps: { innerHTML: _vm._s(_vm.bodyHtml) } }),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-4" }, [
+                  _c("div", { staticClass: "ml-auto" }, [
+                    _vm.authorize("modify", _vm.answer)
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-sm btn-outline-info",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.edit($event)
+                              }
+                            }
+                          },
+                          [_vm._v("Edit")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.authorize("modify", _vm.answer)
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-sm btn-outline-danger",
+                            attrs: { type: "submit" },
+                            on: { click: _vm.destroy }
+                          },
+                          [_vm._v("Delete")]
+                        )
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-4" }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-4" },
+                  [
+                    _c("user-info", {
+                      attrs: { model: _vm.answer, label: "Answered" }
+                    })
+                  ],
+                  1
+                )
               ])
-        ])
-      ],
-      1
-    )
-  ])
+            ])
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48325,35 +48359,51 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.count
-      ? _c("div", { staticClass: "row mt-4" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _c(
-                "div",
-                { staticClass: "card-body" },
-                [
-                  _c("div", { staticClass: "card-title" }, [
-                    _c("h2", [_vm._v(_vm._s(_vm.title))])
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _vm._l(_vm.answers, function(answer) {
-                    return _c("answer", {
-                      key: answer.id,
-                      attrs: { answer: answer }
-                    })
+  return _vm.count
+    ? _c("div", { staticClass: "row mt-4" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _c(
+              "div",
+              { staticClass: "card-body" },
+              [
+                _c("div", { staticClass: "card-title" }, [
+                  _c("h2", [_vm._v(_vm._s(_vm.title))])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _vm._l(_vm.answers, function(answer) {
+                  return _c("answer", {
+                    key: answer.id,
+                    attrs: { answer: answer }
                   })
-                ],
-                2
-              )
-            ])
+                }),
+                _vm._v(" "),
+                _vm.nextUrl
+                  ? _c("div", { staticClass: "text-center mt-3" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-secondary",
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.fetch(_vm.nextUrl)
+                            }
+                          }
+                        },
+                        [_vm._v("Load more answers")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
+            )
           ])
         ])
-      : _vm._e()
-  ])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48462,52 +48512,50 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "d-flex flex-column vote-controls" },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "vote-up",
-            class: _vm.classes,
-            attrs: { title: _vm.title("up") },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.voteUp($event)
-              }
+  return _c(
+    "div",
+    { staticClass: "d-flex flex-column vote-controls" },
+    [
+      _c(
+        "a",
+        {
+          staticClass: "vote-up",
+          class: _vm.classes,
+          attrs: { title: _vm.title("up") },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.voteUp($event)
             }
-          },
-          [_c("i", { staticClass: "fas fa-caret-up fa-3x" })]
-        ),
-        _vm._v(" "),
-        _c("span", { staticClass: "votes-count" }, [_vm._v(_vm._s(_vm.count))]),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "vote-down",
-            class: _vm.classes,
-            attrs: { title: _vm.title("down") },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.voteDown($event)
-              }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-caret-up fa-3x" })]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "votes-count" }, [_vm._v(_vm._s(_vm.count))]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "vote-down",
+          class: _vm.classes,
+          attrs: { title: _vm.title("down") },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.voteDown($event)
             }
-          },
-          [_c("i", { staticClass: "fas fa-caret-down fa-3x" })]
-        ),
-        _vm._v(" "),
-        _vm.name === "question"
-          ? _c("favorite", { attrs: { question: _vm.model } })
-          : _c("accept", { attrs: { answer: _vm.model } })
-      ],
-      1
-    )
-  ])
+          }
+        },
+        [_c("i", { staticClass: "fas fa-caret-down fa-3x" })]
+      ),
+      _vm._v(" "),
+      _vm.name === "question"
+        ? _c("favorite", { attrs: { question: _vm.model } })
+        : _c("accept", { attrs: { answer: _vm.model } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

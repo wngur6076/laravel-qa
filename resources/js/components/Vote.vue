@@ -1,19 +1,17 @@
 <template>
-    <div>
-        <div class="d-flex flex-column vote-controls">
-            <a @click.prevent="voteUp" :title="title('up')"
-            class="vote-up" :class="classes">
-                <i class="fas fa-caret-up fa-3x"></i>
-            </a>
-            <span class="votes-count">{{ count }}</span>
-            <a @click.prevent="voteDown" :title="title('down')"
-            class="vote-down" :class="classes">
-                <i class="fas fa-caret-down fa-3x"></i>
-            </a>
+    <div class="d-flex flex-column vote-controls">
+        <a @click.prevent="voteUp" :title="title('up')"
+        class="vote-up" :class="classes">
+            <i class="fas fa-caret-up fa-3x"></i>
+        </a>
+        <span class="votes-count">{{ count }}</span>
+        <a @click.prevent="voteDown" :title="title('down')"
+        class="vote-down" :class="classes">
+            <i class="fas fa-caret-down fa-3x"></i>
+        </a>
 
-            <favorite v-if="name === 'question'" :question="model"></favorite>
-            <accept v-else :answer="model"></accept>
-        </div>
+        <favorite v-if="name === 'question'" :question="model"></favorite>
+        <accept v-else :answer="model"></accept>
     </div>
 </template>
 
