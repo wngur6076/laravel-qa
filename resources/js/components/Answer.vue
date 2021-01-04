@@ -41,7 +41,6 @@ export default {
             .then(res => {
                 this.editing = false;
                 this.bodyHtml = res.data.body_html;
-                console.log(res.data.body_html);
                 this.$toast.success(res.data.message, "Sucess", {timeout: 3000});
             })
             .catch(err => {
