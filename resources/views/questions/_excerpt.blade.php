@@ -13,7 +13,7 @@
     <div class="media-body">
         <div class="d-flex align-items-center">
             <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
-            <div class="ml-auto">
+            {{-- <div class="ml-auto">
                 @can('update', $question)
                     <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
                 @endcan
@@ -24,7 +24,7 @@
                         <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
                     </form>
                 @endcan
-            </div>
+            </div> --}}
         </div>
         <p class="lead">
             작성자
