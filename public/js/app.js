@@ -11884,9 +11884,9 @@ __webpack_require__.r(__webpack_exports__);
       return "answer-".concat(this.id);
     }
   },
-  mounted: function mounted() {
-    this.highlight();
-  },
+  // mounted () {
+  //     this.highlight()
+  // },
   methods: {
     setEditCache: function setEditCache() {
       this.beforeEditCache = this.body;
@@ -11926,6 +11926,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Answer_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Answer.vue */ "./resources/js/components/Answer.vue");
 /* harmony import */ var _NewAnswer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewAnswer.vue */ "./resources/js/components/NewAnswer.vue");
+/* harmony import */ var _mixins_highlight__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../mixins/highlight */ "./resources/js/mixins/highlight.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -11964,8 +11965,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['question'],
+  mixins: [_mixins_highlight__WEBPACK_IMPORTED_MODULE_2__["default"]],
   data: function data() {
     return {
       questionId: this.question.id,
@@ -11981,6 +11984,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     add: function add(answer) {
       this.answers.push(answer);
       this.count++;
+      this.highlight();
     },
     remove: function remove(index) {
       this.answers.splice(index, 1);
@@ -12152,6 +12156,7 @@ md.use(markdown_it_prism__WEBPACK_IMPORTED_MODULE_1___default.a);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MEditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MEditor */ "./resources/js/components/MEditor.vue");
 //
 //
 //
@@ -12175,8 +12180,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['questionId'],
+  components: {
+    MEditor: _MEditor__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   methods: {
     create: function create() {
       var _this = this;
@@ -66668,29 +66679,40 @@ var render = function() {
               }
             },
             [
-              _c("div", { staticClass: "form-group" }, [
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.body,
-                      expression: "body"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { rows: "7", name: "body", required: "" },
-                  domProps: { value: _vm.body },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.body = $event.target.value
-                    }
-                  }
-                })
-              ]),
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _c(
+                    "m-editor",
+                    { attrs: { body: _vm.body, name: "new-answer" } },
+                    [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.body,
+                            expression: "body"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { rows: "7", name: "body", required: "" },
+                        domProps: { value: _vm.body },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.body = $event.target.value
+                          }
+                        }
+                      })
+                    ]
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c(
@@ -80090,6 +80112,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     highlight: function highlight() {
       var el = this.$refs.bodyHtml;
+      console.log('el', el);
       if (el) prismjs__WEBPACK_IMPORTED_MODULE_0___default.a.highlightAllUnder(el);
     }
   }

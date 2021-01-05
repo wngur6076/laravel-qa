@@ -63,9 +63,9 @@ export default {
         }
     },
 
-    mounted () {
-        this.highlight()
-    },
+    // mounted () {
+    //     this.highlight()
+    // },
 
     methods: {
         setEditCache () {
