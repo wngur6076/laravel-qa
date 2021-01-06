@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\VoteAnswerController;
 use App\Http\Controllers\Api\AnswersController;
+use App\Http\Controllers\Api\FavoritesController;
 use App\Http\Controllers\Api\QuestionsController;
+use App\Http\Controllers\Api\AcceptAnswerController;
 use App\Http\Controllers\Api\VoteQuestionController;
 use App\Http\Controllers\Api\QuestionDetailsController;
 
@@ -31,6 +33,10 @@ Route::middleware(['auth:api'])->group(function() {
 
     Route::post('/questions/{question}/vote', VoteQuestionController::class);
     Route::post('/answers/{answer}/vote', VoteAnswerController::class);
+
+    Route::post('/answers/{answer}/accept', AcceptAnswerController::class);
+    Route::post('/questions/{question}/favorites', [FavoritesController::class, 'store']);
+    Route::delete('/questions/{question}/favorites', [FavoritesController::class, 'destroy']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
