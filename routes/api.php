@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AnswersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -20,9 +21,11 @@ use App\Http\Controllers\Api\QuestionDetailsController;
 Route::post('/token', [LoginController::class, 'getToken']);
 
 Route::get('/questions', [QuestionsController::class, 'index']);
+Route::get('/questions/{question}/answers', [AnswersController::class, 'index']);
 Route::get('/questions/{question}-{slug}', QuestionDetailsController::class);
 Route::middleware(['auth:api'])->group(function() {
     Route::apiResource('/questions', QuestionsController::class)->except('index');
+    Route::apiResource('/questions.answers', AnswersController::class)->except('index');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
