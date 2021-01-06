@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\AnswersController;
 use App\Http\Controllers\Api\FavoritesController;
 use App\Http\Controllers\Api\QuestionsController;
 use App\Http\Controllers\Api\AcceptAnswerController;
+use App\Http\Controllers\Api\MyPostsController;
 use App\Http\Controllers\Api\VoteQuestionController;
 use App\Http\Controllers\Api\QuestionDetailsController;
 
@@ -37,6 +38,7 @@ Route::middleware(['auth:api'])->group(function() {
     Route::post('/answers/{answer}/accept', AcceptAnswerController::class);
     Route::post('/questions/{question}/favorites', [FavoritesController::class, 'store']);
     Route::delete('/questions/{question}/favorites', [FavoritesController::class, 'destroy']);
+    Route::get('/my-posts', MyPostsController::class);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
