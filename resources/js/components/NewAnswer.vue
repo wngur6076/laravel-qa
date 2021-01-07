@@ -46,7 +46,7 @@ export default {
         }
     },
 
-    data() {
+    data () {
         return {
             body: ''
         }

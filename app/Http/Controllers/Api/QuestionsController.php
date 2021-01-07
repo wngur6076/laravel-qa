@@ -17,7 +17,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = Question::with('user')->latest()->Paginate(10);
+        $questions = Question::with('user')->latest()->Paginate(5);
 
         return QuestionResource::collection($questions);
     }
