@@ -17,8 +17,6 @@
                 <div class="ml-auto">
                     <a href="#" v-if="authorize('modify', question)" class="btn btn-sm btn-outline-info">Edit</a>
                     <form v-if="authorize('deleteQuestion', question)" class="form-delete" action="#" method="POST">
-                        @method('DELETE')
-                        @csrf
                         <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
                     </form>
                 </div>
