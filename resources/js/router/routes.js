@@ -3,6 +3,7 @@ import QuestionPage from '../pages/QuestionPage.vue'
 import MyPostsPage from '../pages/MyPostsPage.vue'
 import NotFoundPage from '../pages/NotFoundPage.vue'
 import CreateQuestionPage from '../pages/CreateQuestionPage.vue'
+import EditQuestionPage from '../pages/EditQuestionPage.vue'
 
 const routes = [
     {
@@ -32,6 +33,11 @@ const routes = [
         path: '/questions/:slug', // {slug}
         component: QuestionPage,
         name: 'question.show'
+    },
+    {
+        path: '/questions/:id/edit',
+        component: EditQuestionPage,
+        name: 'questions.edit'
     },
     {
         path: '*',
