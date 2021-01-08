@@ -45,7 +45,7 @@ export default {
             bodyHtml: this.answer.body_html,
             id: this.answer.id,
             questionId: this.answer.question_id,
-            beforeEditCache: null
+            beforeEditCache: null,
         }
     },
 
@@ -82,7 +82,6 @@ export default {
             axios.delete(this.endpoint)
                 .then(res => {
                     this.$toast.success(res.data.message, "Success", { timeout: 2000 })
-
                     this.$emit('deleted')
                 })
         }

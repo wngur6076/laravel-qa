@@ -32,10 +32,11 @@ const routes = [
     {
         path: '/questions/:slug', // {slug}
         component: QuestionPage,
-        name: 'question.show'
+        name: 'question.show',
+        props: true
     },
     {
-        path: '/questions/:id/edit',
+        path: '/questions/:id/edit', // this.$router.parmas.id
         component: EditQuestionPage,
         name: 'questions.edit'
     },
