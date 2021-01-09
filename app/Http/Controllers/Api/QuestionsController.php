@@ -88,6 +88,8 @@ class QuestionsController extends Controller
 
         $question->delete();
 
+        if (env('APP_ENV') == 'local') sleep(1);
+
         return response()->json([
             'message' => "Your quesion has been deleted."
         ]);

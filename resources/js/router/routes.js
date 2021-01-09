@@ -19,10 +19,13 @@ const routes = [
     {
         path: '/questions/create',
         component: CreateQuestionPage,
-        name: 'questions.create'
+        name: 'questions.create',
+        meta: {
+            requiresAuth: true
+        }
     },
     {
-        path: '/my-posts',
+        path: '/home',
         component: MyPostsPage,
         name: 'my-posts',
         meta: {

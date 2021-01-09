@@ -28,6 +28,7 @@
 
 <script>
 import MEditor from './MEditor';
+
 export default {
     props: ['questionId'],
 
