@@ -19,7 +19,7 @@ class QuestionDetailsResource extends JsonResource
             'title'           => $this->title,
             'votes_count'     => $this->votes_count,
             'answers_count'   => $this->answers_count,
-            'is_favirited'    => $this->is_favirited,
+            'is_favorited' => $this->is_favorited,
             'favorites_count' => $this->favorites_count,
             'body'            => $this->body,
             'body_html'       => $this->body_html,
