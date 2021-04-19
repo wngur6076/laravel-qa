@@ -38,6 +38,8 @@
 
 ## ⚙️ 배운점
 * 2020년 12월 23일에 수강
+* php artisan tinker 이용해서 설명을 잘해줌
+* Seeders 이용 Faker Data 활용 예를 잘 보여줌
 * Vue js가 작동하는 방식과 Laravel Backend API와 상호 작용하는 방식 이해
 * RESTful API 빌드
 * Bootstrap 기초적인 부분 활용
