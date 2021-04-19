@@ -30,5 +30,15 @@
     <img width="45%" src="https://user-images.githubusercontent.com/71273875/115239143-6135a900-a159-11eb-9aa5-928058603b13.gif">
 </p>
 
+- **나의질문, 나의답변**
+<p align="center">
+    <img width="45%" src="https://user-images.githubusercontent.com/71273875/115239723-005aa080-a15a-11eb-8cfd-a4d1d2026f0b.gif">
+    <img width="45%" src="https://user-images.githubusercontent.com/71273875/115239826-19fbe800-a15a-11eb-9b08-9a72add6d98c.gif">
+</p>
+
 ## ⚙️ 배운점
-* 
+* 2021.01월에 수강
+* Vue js가 작동하는 방식과 Laravel Backend API와 상호 작용하는 방식 이해
+* RESTful API 빌드
+* Bootstrap 기초적인 부분 활용
+* Heroku 이용해 무료로 Laravel 애플리케이션 배포
